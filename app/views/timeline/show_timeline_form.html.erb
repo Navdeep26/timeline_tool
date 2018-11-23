@@ -1,0 +1,181 @@
+<style type="text/css">
+  .none{
+    display: none;
+  }
+    .fixed-width{
+    width: 100%;
+    height: 7rem;
+    background: blue;
+    color: white;
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+
+  .timeline_form{
+    max-width: 68rem;
+    margin: auto;
+  }
+  .update_form{
+    width: 68rem;
+  }
+</style>
+
+<div class="" >
+  <form class="timeline_form"  >
+  <!-- <h3 style="text-align: center; color: blue; ">Create Timeline tool</h3> -->
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" class="form-control" name="name" placeholder="name" <% if @timeline.present? %> disabled <% end %> value="<%= @timeline.name if @timeline.present? %>" >
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Description</label>
+    <textarea placeholder="description" name="description" class="form-control" <% if @timeline.present? %> disabled <% end %> style="width: 100%" ><%= @timeline.description if @timeline.present? %></textarea>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Start date</label>
+    <div class='input-group date' id='datetimepicker1'>
+      <input placeholder="start date" type='text' <% if @timeline.present? %> disabled <% end %> value="<%= @timeline.start_date if @timeline.present? %>" name="start_date"  class="form-control" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <!-- <input name="start_date" value="<%= @timeline.start_date if @timeline.present? %>" class="start_date" /> -->
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">End date</label>
+    <div class='input-group date' id='datetimepicker2'>
+      <input placeholder="end date" type='text' <% if @timeline.present? %> disabled <% end %> value="<%= @timeline.end_date if @timeline.present? %>" name="end_date"  class="form-control" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <!-- <input name="end_date" value="<%= @timeline.end_date if @timeline.present? %>" class="end_date" /> -->
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Added by</label>
+    <input name="added_by" <% if @timeline.present? %> disabled <% end %> value="<%= @timeline.added_by if @timeline.present? %>" name="name" type="text" class="form-control" placeholder="Added by">
+  </div>
+  <input type="hidden" name="task_id" value="<%= @timeline.id if @timeline.present? %>">
+  <% if @timeline.present?  %>
+  <div class="row" >
+    <div class="col-md-6" >
+      <button  type="button" class="btn btn-primary edit_form">Edit</button>
+      <button  type="button" data-dismiss="modal" class="btn btn-primary submit_form none">Update</button>
+      <button  type="button" data-dismiss="modal" data-id="<%= @timeline.id %>" class="btn btn-primary delete_timeline">Delete</button>
+    </div>
+    <div class="col-md-6" >
+        <button style="float: right;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+  <% else %>
+  <button  type="button" class="btn btn-primary update_form">Submit</button>
+  <% end %>
+
+  </form>
+</div>
+
+<!-- <div class="show_graph_container" ></div> -->
+<script>
+  // $(document).ready(function(){
+  //   debugger
+  // })
+
+  // $('.end_date').datepicker({
+  //     uiLibrary: 'bootstrap4'
+  // });
+  // $('.start_date').datepicker({
+  //     uiLibrary: 'bootstrap4'
+  // });
+
+  $(".submit_form").click(function(e) {
+    debugger
+
+
+    var form = $(this);
+    var url = "timeline/create";
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $('.timeline_form').serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               // alert(data); // show response from the php script.
+               // location.reload() ;
+               // $('#myModall').modal('toggle');
+              $('.show_graph_container').html(data);
+           }
+         });
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+
+    $(".update_form").click(function(e) {
+    debugger
+
+
+    var form = $(this);
+    var url = "timeline/create";
+    var show_graph = "show_graph";
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $('.timeline_form').serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               // alert(data); // show response from the php script.
+               // location.reload() ;
+               // $('#myModall').modal('toggle');
+              // $('.show_graph_container').html(data);
+              window.location.href = show_graph;
+           }
+         });
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+
+ $(function() {
+  $('#datetimepicker1').datepicker();
+  $('#datetimepicker2').datepicker();
+});
+
+ $(document).delegate('.edit_form', 'click', function(){
+  debugger
+  $(this).addClass('none');
+  $('.form-control').prop("disabled", false)
+  $('.submit_form').removeClass('none');
+
+ })
+
+ $(document).delegate('.delete_timeline', 'click', function(){
+  debugger
+  var timeline_id = $(this).data('id');
+  $('.confirm_delete').attr('data-id', timeline_id );
+  $('#destroy_timeline_modal').modal('show');
+ } )
+
+ $(document).delegate('.confirm_delete', 'click', function(){
+  debugger
+  var timeline_id = $(this).data('id');
+  $.post("timeline/destroy",
+    {
+        task_id: timeline_id,
+    },
+    function(data, status){
+        // $('.timeline_form').html(data);
+        $('#destroy_timeline_modal').modal('hide')
+        $('.show_graph_container').html(data);
+        // location.reload() ;
+    });
+ } )
+
+ // $('.delete_timeline').click(function(){
+ //  debugger
+ //  // $('#destroy_timeline_modal').modal('show');
+ //  // $('#myModall').modal('hide');
+ // })
+
+</script>
