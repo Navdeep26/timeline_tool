@@ -35,6 +35,8 @@ gem 'sprockets-rails', '2.3.3'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
+
+gem 'rails_12factor', group: :production
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
@@ -59,9 +61,9 @@ end
 #   gem 'sqlite3'
 # end
 
+
 group :production do
   gem 'pg', '~> 0.18'
-  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
