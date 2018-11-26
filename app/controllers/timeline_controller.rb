@@ -19,7 +19,11 @@ class TimelineController < ApplicationController
   		timeline.added_by = params[:added_by]
   		if timeline.save
   			# render text: 'success'
-        render "show_graph" 
+        if params[:task_id].present?
+          render "show_graph" , :layout => false
+        else
+          render "show_graph"
+        end
   		end
   	end
   end

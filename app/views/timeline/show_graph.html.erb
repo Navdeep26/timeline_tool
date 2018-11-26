@@ -5,6 +5,10 @@
   .gtasktable{
     width: 100%;
   }
+
+  body{
+    font-family: Roboto, sans-serif;
+  }
   /*.form-control{
     width: 49% !important;
   }*/
@@ -45,6 +49,7 @@ table, th, td {
   background: rgb(94, 151, 246) !important;
   height: 1rem !important;
   border-radius: 2px !important ;
+  cursor: pointer;
 } 
 
 td.gtaskcell {
@@ -54,6 +59,36 @@ td.gtaskcell {
 .ggroupitem{
   height: 3rem !important ;
   margin-bottom: 5px !important ;
+}
+
+.gTaskInfo {
+    background: #ffffff !important;
+    width: 270px !important;
+    border: #656565 1px solid;
+    border-radius: 10px;
+    padding: 4px 6px 4px 6px;
+    float: left;
+    /* text-align: center; */
+    text-align: justify;
+    /* font-size: 1rem; */
+    line-height: 2rem;
+}
+
+.gTtTitle {
+  font-size: 1.5rem !important;
+  font-family: Roboto, sans-serif;
+
+}
+.gTaskText{
+  float: right !important;
+  display: inline-block !important;
+  font-size: 12px !important;
+}
+
+.gTaskLabel{
+  /*float: right !important;*/
+  /*display: inline-block !important;*/
+  font-size: 13px !important;
 }
 
 </style>
@@ -157,7 +192,8 @@ g.Draw();
 <div class="show_graph_container" ></div>
 
 <script type="text/javascript">
- $(document).delegate('.ggroupitem', 'dblclick', function(){
+ $(document).delegate('.ggroupitem', 'click', function(){
+  debugger
   // $('.ggroupitem').dblclick(function(){
    var id = $(this).attr('id')
    var task_id = id.split('_')[1];
@@ -180,4 +216,35 @@ g.Draw();
     $('.ggroupblackendpointleft').addClass('none');
     $('.ggroupblackendpointright').addClass('none');
   })
+
+ $(document).delegate('.gformlabel', 'click', function(){
+  debugger
+    $('.gfoldercollapse').addClass('none');
+    $('.ggroupblackendpointleft').addClass('none');
+    $('.ggroupblackendpointright').addClass('none');
+ })
+
+ $(".submit_form").click(function(e) {
+    debugger
+
+
+    var form = $(this);
+    var url = "timeline/create";
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $('.timeline_form').serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               // alert(data); // show response from the php script.
+               // location.reload() ;
+               // $('#myModall').modal('toggle');
+              $('.show_graph_container').html(data);
+           }
+         });
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+
 </script>
