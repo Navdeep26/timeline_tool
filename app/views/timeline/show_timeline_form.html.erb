@@ -39,7 +39,10 @@
 
 <div class="" >
   <form class="timeline_form"  >
-  <!-- <h3 style="text-align: center; color: blue; ">Create Timeline tool</h3> -->
+  <% if !params[:task_id].present? %>  
+    <h3 style="text-align: center; color: blue; margin-top: 0; ">Create Timeline Tool</h3>
+    <!-- <hr> -->
+  <% end %>
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
     <input type="text" class="form-control" name="name" placeholder="name" <% if @timeline.present? %> disabled <% end %> value="<%= @timeline.name if @timeline.present? %>" >

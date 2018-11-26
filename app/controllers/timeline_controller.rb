@@ -42,7 +42,7 @@ class TimelineController < ApplicationController
       @timeline = Timeline.where(:id => params[:task_id]).first
       if @timeline.destroy
         # render plain: 'success'
-        render "show_graph"
+        render "show_graph" , :layout => false
       end
     end
   end
