@@ -35,6 +35,7 @@
 
   $(document).ready(function(){
     debugger
+    $('.gtasklist').addClass('none');
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');
     $('.ggroupblackendpointright').addClass('none');
@@ -42,6 +43,7 @@
 
  $(document).delegate('.gformlabel', 'click', function(){
   debugger
+    $('.gtasklist').addClass('none');
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');
     $('.ggroupblackendpointright').addClass('none');
