@@ -45,6 +45,7 @@
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');
     $('.ggroupblackendpointright').addClass('none');
+    $('.glinev').addClass('none')
  })
 
 //  $(".submit_form").click(function(e) {
