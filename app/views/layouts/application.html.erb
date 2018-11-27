@@ -36,13 +36,15 @@
   </head>
 
   <body>
-    <div class="header" >
-        <div class="row fixed-width" >
-            <div class="col-md-12" >
-                <h2>Timeline Tool</h1>
+    <% if !params[:task_id].present? %>
+        <div class="header" >
+            <div class="row fixed-width" >
+                <div class="col-md-12" >
+                    <h2>Timeline Tool</h1>
+                </div>
             </div>
         </div>
-    </div>
+    <% end %>
     <div class="" >
         <%= yield %>
     </div>

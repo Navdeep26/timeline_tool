@@ -20,11 +20,11 @@ class TimelineController < ApplicationController
   		timeline.added_by = params[:added_by]
   		if timeline.save
   			# render text: 'success'
-        if params[:task_id].present?
-          render "show_graph" , :layout => false
-        else
+        # if params[:task_id].present?
+        #   render "show_graph" , :layout => false
+        # else
           render "show_graph"
-        end
+        # end
   		end
   	end
   end
@@ -43,7 +43,7 @@ class TimelineController < ApplicationController
       @timeline = Timeline.where(:id => params[:task_id])
       if @timeline.delete_all 
         # render plain: 'success'
-        render "show_graph" , :layout => false
+        render "show_graph" 
       end
     end
   end
