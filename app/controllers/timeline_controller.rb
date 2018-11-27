@@ -8,7 +8,8 @@ class TimelineController < ApplicationController
   def create
   	if params[:name].present?
       if params[:task_id].present?
-        timeline = Timeline.where(:id => params[:task_id]).first
+        timeline_array = Timeline.where(:id => params[:task_id])
+        timeline = timeline_array.first
       else
   		  timeline = Timeline.new
       end
