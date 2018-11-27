@@ -39,8 +39,8 @@ class TimelineController < ApplicationController
 
   def destroy
     if params[:task_id].present?
-      @timeline = Timeline.where(:id => params[:task_id]).first
-      if @timeline.destroy
+      @timeline = Timeline.where(:id => params[:task_id])
+      if @timeline.destroy_all
         # render plain: 'success'
         render "show_graph" , :layout => false
       end
