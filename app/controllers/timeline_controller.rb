@@ -48,6 +48,12 @@ class TimelineController < ApplicationController
     end
   end
 
+  def filter_name
+    if params[:name].present?
+      render "show_graph"
+    end
+  end
+
   def show_graph
     
   end

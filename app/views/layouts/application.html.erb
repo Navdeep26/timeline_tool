@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <% if !params[:task_id].present? %>
+    <% if !params[:task_id].present? && !params[:name].present? %>
         <div class="header" >
             <div class="row fixed-width" >
                 <div class="col-md-6" >
@@ -44,7 +44,7 @@
                 </div>
                 <% if !request.original_url.include? "show_graph" %>
                     <div class="col-md-6" >
-                        <a style="float: right;color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">Show Graph</a>
+                        <a target="_blank" style="float: right;color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">Show Graph</a>
                     </div>
                 <% end %>
             </div>

@@ -28,11 +28,13 @@
     margin: auto;
     border: 1px solid #decccc;
     padding: 4rem;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
   <% end %>
-  
+
   .update_form{
     width: 100%;
+    background: #ae00ad;
   }
   label {
     font-weight: 200;
@@ -40,13 +42,14 @@
   textarea {
     min-height: 125px;
   }
+
 </style>
 
 
-<div class="" >
+<div class="form_container" >
   <form class="timeline_form"  >
   <% if !params[:task_id].present? %>  
-    <h3 style="text-align: center; color: blue; margin-top: 0; ">Create Timeline Tool</h3>
+    <h3 style="text-align: center; color: #ae00ad; margin-top: 0; ">Create Task</h3>
     <!-- <hr> -->
   <% end %>
   <div class="form-group">

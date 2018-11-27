@@ -34,7 +34,6 @@
 
 
   $(document).ready(function(){
-    debugger
     $('.gtasklist').addClass('none');
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');
@@ -42,7 +41,6 @@
   })
 
  $(document).delegate('.gformlabel', 'click', function(){
-  debugger
     $('.gtasklist').addClass('none');
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');
@@ -134,7 +132,6 @@
 	});
 
 	$(document).delegate('.form-control', 'focus', function(){
-		debugger
 		$(this).removeClass('error')
 	})
 
@@ -189,6 +186,8 @@
 	        // location.reload() ;
 	    });
 	} )
+
+	
 
 
 

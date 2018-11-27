@@ -137,7 +137,15 @@ td.gtaskcell {
   font-size: 13px !important;
 }
 .gantt{
-  padding: 3rem;
+  /*padding: 3rem;*/
+    max-width: 128rem;
+    margin: auto;
+}
+.user_filter {
+  max-width: 16rem;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 </style>
@@ -150,7 +158,24 @@ td.gtaskcell {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <script src="jsgantt.js" type="text/javascript"></script> -->
 
-
+<% if params[:name].present? %>
+  <% all_timeline = Timeline.where(:added_by => params[:name]) %>
+<% else %>
+  <% all_timeline = Timeline.all %>
+<% end %>  
+<% all_user = all_timeline.pluck('added_by') %>
+<% if !params[:name].present? && !params[:id].present? %>
+  <div>
+    <h4 style="text-align: center; color: #ae00ad" >Filter based on user</h4>
+    <select name="user_name" class="form-control user_filter" >
+      <option value="" >Please Select</option>
+      <!-- <option value="all" >All</option> -->
+      <% all_user.each do |user| %>
+        <option value="<%= user %>" ><%= user %></option>
+      <% end %>
+    </select>
+  </div>
+<% end %>
 <div style="position:relative" class="gantt" id="GanttChartDIV"></div>
 <script>
   // var task_id = "1"
@@ -178,7 +203,6 @@ g.setShowRes(0);
 g.setShowComp(0);
 g.setShowDur(0);
 
-<% all_timeline = Timeline.all %>
 <% all_timeline.each do |timeline| %>
         var task_id = <%= timeline.id %>;
         var task_name = "<%= timeline.name %>"
@@ -225,7 +249,7 @@ g.Draw();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Timeline Tool</h4>
+        <h4 style="color: #ae00ad;" class="modal-title">Timeline Tool</h4>
       </div>
       <div class="modal-body timeline_form">
         <!-- <p>Some text in the modal.</p> -->
@@ -302,4 +326,22 @@ g.Draw();
     // $('.gtaskname').html('Task Name')
     $('.glinev').addClass('none')
   })
+
+  <% if !params[:name].present? %>
+
+    $(document).delegate('.user_filter', 'change', function(){
+          var name = $('option:selected', this).text();
+          $.post("timeline/filter_name",
+        {
+            name: name,
+        },
+        function(data, status){
+            // $('.timeline_form').html(data);
+            $('#destroy_timeline_modal').modal('hide')
+            $('.show_graph_container').html(data);
+            // location.reload() ;
+        });
+      });
+  <% end %>
+
 </script>
