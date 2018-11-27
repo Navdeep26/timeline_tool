@@ -101,33 +101,64 @@
 
  	$(document).delegate('.update_form', 'click', function(){
     // $(".update_form").click(function(e) {
+    	var field1 = $('.field1').val();
+    	var field2 = $('.field2').val();
+    	var field3 = $('.field3').val();
+    	var field4 = $('.field4').val();
+    	var field5 = $('.field5').val();
 	    debugger
+	    if (field1 && field2 && field3 && field4 && field5){
+		    var form = $(this);
+		    var url = "timeline/create";
+		    var show_graph = "show_graph";
 
-	    var form = $(this);
-	    var url = "timeline/create";
-	    var show_graph = "show_graph";
+		    $.ajax({
+		           type: "POST",
+		           url: url,
+		           data: $('.timeline_form').serialize(), // serializes the form's elements.
+		           success: function(data)
+		           {
+		               // alert(data); // show response from the php script.
+		               // location.reload() ;
+		               // $('#myModall').modal('toggle');
+		              // $('.show_graph_container').html(data);
+		              window.location.href = show_graph;
+		           }
+		         });
 
-	    $.ajax({
-	           type: "POST",
-	           url: url,
-	           data: $('.timeline_form').serialize(), // serializes the form's elements.
-	           success: function(data)
-	           {
-	               // alert(data); // show response from the php script.
-	               // location.reload() ;
-	               // $('#myModall').modal('toggle');
-	              // $('.show_graph_container').html(data);
-	              window.location.href = show_graph;
-	           }
-	         });
-
-	    e.preventDefault(); // avoid to execute the actual submit of the form.
+		    e.preventDefault(); // avoid to execute the actual submit of the form.
+		}
+		else {
+			$('.form-control').addClass('error')
+		}
 	});
 
-	$(function() {
-	  $('#datetimepicker1').datepicker();
-	  $('#datetimepicker2').datepicker();
-	});
+	$(document).delegate('.form-control', 'focus', function(){
+		debugger
+		$(this).removeClass('error')
+	})
+
+	// $(function() {
+	//   // $('#datetimepicker1').datepicker();
+	//   // $('#datetimepicker2').datepicker();
+	//   $('#datetimepicker1').datepicker({
+	//     format: 'dd/mm/yyyy',
+	//     todayHighlight:'TRUE',
+	//     autoclose: true,
+	// })
+	//   $('#datetimepicker2').datepicker({
+	//     format: 'dd/mm/yyyy',
+	//     todayHighlight:'TRUE',
+	//     autoclose: true,
+	// })
+	// });
+
+
+
+	// $('#datetimepicker1').datepicker()
+	// .on('changeDate', function(ev){                 
+	//     $('#datetimepicker1').datepicker('hide');
+	// });
 
 	$(document).delegate('.edit_form', 'click', function(){
 	  debugger

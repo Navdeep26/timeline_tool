@@ -39,9 +39,14 @@
     <% if !params[:task_id].present? %>
         <div class="header" >
             <div class="row fixed-width" >
-                <div class="col-md-12" >
-                    <h2>Timeline Tool</h1>
+                <div class="col-md-6" >
+                    <h2> <a style="text-decoration: none;color: white;" href="/">Timeline Tool</a> </h1>
                 </div>
+                <% if !request.original_url.include? "show_graph" %>
+                    <div class="col-md-6" >
+                        <a style="float: right;color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">Show Graph</a>
+                    </div>
+                <% end %>
             </div>
         </div>
     <% end %>
