@@ -201,7 +201,7 @@ DEPENDENCIES
   duktape
   jbuilder (~> 2.5)
   mysql2 (>= 0.4.4, < 0.6.0)
-  pg (~> 0.18)
+  pg
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails_12factor
