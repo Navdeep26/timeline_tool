@@ -102,10 +102,12 @@
     	var field1 = $('.field1').val();
     	var field2 = $('.field2').val();
     	var field3 = $('.field3').val();
-    	var field4 = $('.field4').val();
+    	// var field4 = $('.field4').val();
     	var field5 = $('.field5').val();
 	    debugger
-	    if (field1 && field2 && field3 && field4 && field5){
+	    if (field1 && field2 && field3 && field5){
+	    	$(this).html('loading')
+	    	$(this).prop('disabled', true);
 		    var form = $(this);
 		    var url = "timeline/create";
 		    var show_graph = "show_graph";
@@ -182,12 +184,12 @@
 	    function(data, status){
 	        // $('.timeline_form').html(data);
 	        $('#destroy_timeline_modal').modal('hide')
-	        $('.show_graph_container').html(data);
-	        // location.reload() ;
+	        // $('.show_graph_container').html(data);
+	        location.reload() ;
 	    });
 	} )
 
-	
+
 
 
 
