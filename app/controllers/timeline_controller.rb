@@ -8,23 +8,26 @@ class TimelineController < ApplicationController
   def create
   	if params[:name].present?
       if params[:task_id].present?
-        timeline_array = Timeline.where(:id => params[:task_id])
-        timeline = timeline_array.first
+        timeline_array = Timeline.where(:id => params[:task_id]).update_all(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date], added_by: params[:added_by])
+        # timeline = timeline_array.first
+        
+            render :partial => "graph"
       else
   		  timeline = Timeline.new
-      end
-  		timeline.name = params[:name]
-  		timeline.description = params[:description]
-  		timeline.start_date = params[:start_date]
-  		timeline.end_date = params[:end_date]
-  		timeline.added_by = params[:added_by]
-  		if timeline.save
-        if params[:task_id].present?
-          render :partial => "graph" 
-        else
-          render "show_graph"
-        end
-  		end
+      
+    		timeline.name = params[:name]
+    		timeline.description = params[:description]
+    		timeline.start_date = params[:start_date]
+    		timeline.end_date = params[:end_date]
+    		timeline.added_by = params[:added_by]
+    		if timeline.save
+          if params[:task_id].present?
+            render :partial => "graph" 
+          else
+            render "show_graph"
+          end
+    		end
+      end  
   	end
   end
 
