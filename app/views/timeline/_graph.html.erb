@@ -38,6 +38,7 @@ g.setShowComp(0);
 g.setShowDur(0);
 
 
+// g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object',         '2016-02-20','2016-03-20', 'ggroupblack',   '',       0, 'Shlomy',   0, 1, 1,  1, '',      '',      '',      g));
 
 <% @all_timeline.each do |timeline| %>
         var task_id = <%= timeline.id %>;
@@ -56,7 +57,7 @@ g.setShowDur(0);
           var end_date_year = new Date().getFullYear()
         <% end %> 
   // g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',   0, '',    100,   1, 0,  1,     '',      '',      task_desc , g));
-  g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1,     '',      '',      task_desc, g));
+  g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, 'Brian',    0,   1, 1,  1,     '',      '',      task_desc, g));
 <% end %>
 
 g.Draw();

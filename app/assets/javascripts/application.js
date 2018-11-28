@@ -29,6 +29,21 @@
         $('#myModall').modal('show')
         // alert("Data: " + data + "\nStatus: " + status);
     });
+
+   $(function() {
+    // $('#datetimepicker1').datepicker();
+    // $('#datetimepicker2').datepicker();
+    $('#datetimepicker1').datepicker({
+      format: 'dd/mm/yyyy',
+      todayHighlight:'TRUE',
+      autoclose: true,
+  })
+    $('#datetimepicker2').datepicker({
+      format: 'dd/mm/yyyy',
+      todayHighlight:'TRUE',
+      autoclose: true,
+  })
+  });
   })
 
 
