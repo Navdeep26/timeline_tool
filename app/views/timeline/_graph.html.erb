@@ -1,0 +1,81 @@
+<% if params[:filter_name].present? && params[:filter_name] != "All user" %>
+  <% @all_timeline = Timeline.where(:added_by => params[:filter_name]) %>
+<% else %>
+  <% @all_timeline = Timeline.all %>
+<% end %>  
+<% all_user = Timeline.all.pluck('added_by').uniq %>
+
+
+  <div>
+    <h4 style="text-align: center; color: #ae00ad" >Filter based on user</h4>
+    <select name="user_name" class="form-control user_filter" >
+      <option value="" >Please Select</option>
+      <option value="all" >All user</option>
+      <% all_user.each do |user| %>
+        <option value="<%= user %>" ><%= user %></option>
+      <% end %>
+    </select>
+  </div>
+
+
+<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+<script>
+  var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+  if( g.getDivId() != null ) {
+g.setCaptionType('Complete');
+g.setQuarterColWidth(36);
+g.setDateTaskDisplayFormat('day dd month yyyy');
+g.setDayMajorDateDisplayFormat('mon yyyy - Week ww');
+g.setWeekMinorDateDisplayFormat('dd mon');
+g.setShowTaskInfoLink(1);
+g.setShowEndWeekDate(0);
+g.setUseSingleCell(10000);
+g.setFormatArr('Day', 'Week', 'Month');
+g.setShowTaskInfoRes(0);
+g.setShowEndDate(1);
+g.setShowRes(0);
+g.setShowComp(0);
+g.setShowDur(0);
+
+
+
+<% @all_timeline.each do |timeline| %>
+        var task_id = <%= timeline.id %>;
+        var task_name = "<%= timeline.name %>"
+        var task_desc = "<%= timeline.description %>"
+        var start_date_day = "<%= timeline.start_date.split('/').first %>"
+        var start_date_month = "<%= timeline.start_date.split('/').second %>"
+        var start_date_year = "<%= timeline.start_date.split('/').last %>"
+        <% if timeline.end_date.present? %>
+          var end_date_day = "<%= timeline.end_date.split('/').first %>"
+          var end_date_month = "<%= timeline.end_date.split('/').second %>"
+          var end_date_year = "<%= timeline.end_date.split('/').last %>"
+        <% else  %> 
+          var end_date_day =  new Date().getDate()
+          var end_date_month = new Date().getMonth() + 1
+          var end_date_year = new Date().getFullYear()
+        <% end %> 
+  // g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',   0, '',    100,   1, 0,  1,     '',      '',      task_desc , g));
+  g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1,     '',      '',      task_desc, g));
+<% end %>
+
+g.Draw();
+}
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('.gtasklist').addClass('none');
+    $('.gfoldercollapse').addClass('none');
+    $('.ggroupblackendpointleft').addClass('none');
+    $('.ggroupblackendpointright').addClass('none');
+  })
+
+ $(document).delegate('.gformlabel', 'click', function(){
+    $('.gtasklist').addClass('none');
+    $('.gfoldercollapse').addClass('none');
+    $('.ggroupblackendpointleft').addClass('none');
+    $('.ggroupblackendpointright').addClass('none');
+    $('.glinev').addClass('none')
+ })
+</script>

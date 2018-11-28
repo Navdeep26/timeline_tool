@@ -19,12 +19,11 @@ class TimelineController < ApplicationController
   		timeline.end_date = params[:end_date]
   		timeline.added_by = params[:added_by]
   		if timeline.save
-  			# render text: 'success'
-        # if params[:task_id].present?
-        #   render "show_graph" , :layout => false
-        # else
+        if params[:task_id].present?
+          render :partial => "graph" 
+        else
           render "show_graph"
-        # end
+        end
   		end
   	end
   end
@@ -42,15 +41,15 @@ class TimelineController < ApplicationController
     if params[:task_id].present?
       @timeline = Timeline.where(:id => params[:task_id])
       if @timeline.delete_all 
-        # render plain: 'success'
-        render "show_graph" 
+        # render "show_graph"
+        render :partial => "graph" 
       end
     end
   end
 
   def filter_name
-    if params[:name].present?
-      render "show_graph"
+    if params[:filter_name].present?
+      render :partial => "graph"
     end
   end
 
