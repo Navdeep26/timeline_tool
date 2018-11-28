@@ -179,14 +179,6 @@ td.gtaskcell {
 <% end %>
 <div style="position:relative" class="gantt" id="GanttChartDIV"></div>
 <script>
-  // var task_id = "1"
-  // var task_name = "first task"
-  // var start_date_day = "20"
-  // var start_date_month = "02"
-  // var start_date_year = "2018"
-  // var end_date_day = "20"
-  // var end_date_month = "02"
-  // var end_date_year = "2018"
   var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
   if( g.getDivId() != null ) {
 g.setCaptionType('Complete');
@@ -204,21 +196,24 @@ g.setShowRes(0);
 g.setShowComp(0);
 g.setShowDur(0);
 
+
+
 <% all_timeline.each do |timeline| %>
         var task_id = <%= timeline.id %>;
         var task_name = "<%= timeline.name %>"
         var task_desc = "<%= timeline.description %>"
-        var start_date_month = "<%= timeline.start_date.split('/').first %>"
-        var start_date_day = "<%= timeline.start_date.split('/').second %>"
+        var start_date_day = "<%= timeline.start_date.split('/').first %>"
+        var start_date_month = "<%= timeline.start_date.split('/').second %>"
         var start_date_year = "<%= timeline.start_date.split('/').last %>"
         <% if timeline.end_date.present? %>
-          var end_date_month = "<%= timeline.end_date.split('/').first %>"
-          var end_date_day = "<%= timeline.end_date.split('/').second %>"
+          var end_date_day = "<%= timeline.end_date.split('/').first %>"
+          var end_date_month = "<%= timeline.end_date.split('/').second %>"
           var end_date_year = "<%= timeline.end_date.split('/').last %>"
         <% else  %> 
 
         <% end %> 
-  g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, '',    0,   1, 0,  1,     '',      '',      task_desc , g));
+  // g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',   0, '',    100,   1, 0,  1,     '',      '',      task_desc , g));
+  g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1,     '',      '',      task_desc, g));
 <% end %>
 
 g.Draw();
