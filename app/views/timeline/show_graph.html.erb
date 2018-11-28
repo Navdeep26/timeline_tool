@@ -210,7 +210,9 @@ g.setShowDur(0);
           var end_date_month = "<%= timeline.end_date.split('/').second %>"
           var end_date_year = "<%= timeline.end_date.split('/').last %>"
         <% else  %> 
-
+          var end_date_day =  new Date().getDate()
+          var end_date_month = new Date().getMonth() + 1
+          var end_date_year = new Date().getFullYear()
         <% end %> 
   // g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',   0, '',    100,   1, 0,  1,     '',      '',      task_desc , g));
   g.AddTaskItem(new JSGantt.TaskItem(task_id,   task_name,     start_date_year + "-" + start_date_month + "-" + start_date_day,           end_date_year + "-" + end_date_month + "-" + end_date_day,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1,     '',      '',      task_desc, g));
