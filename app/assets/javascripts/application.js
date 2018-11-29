@@ -114,12 +114,12 @@
  	$(document).delegate('.update_form', 'click', function(){
     // $(".update_form").click(function(e) {
     	var field1 = $('.field1').val();
-    	var field2 = $('.field2').val();
+    	// var field2 = $('.field2').val();
     	var field3 = $('.field3').val();
     	// var field4 = $('.field4').val();
     	var field5 = $('.field5').val();
 	    debugger
-	    if (field1 && field2 && field3 && field5){
+	    if (field1  && field3 && field5){
 	    	$(this).html('loading')
 	    	$(this).prop('disabled', true);
 		    var form = $(this);
@@ -143,7 +143,9 @@
 		    e.preventDefault(); // avoid to execute the actual submit of the form.
 		}
 		else {
-			$('.form-control').addClass('error')
+			$('.field1').addClass('error')
+			$('.field3').addClass('error')
+			$('.field5').addClass('error')
 		}
 	});
 
@@ -202,6 +204,16 @@
 	        // location.reload() ;
 	    });
 	} )
+
+	// $(document).delegate('.show_graph', 'click', function(){
+	// 	$(this).addClass('none');
+	// 	$('.create_task').removeClass('none');
+	// })
+
+	// $(document).delegate('.create_task', 'click', function(){
+	// 	$(this).addClass('none');
+	// 	$('.show_graph').removeClass('none');
+	// })
 
 
 

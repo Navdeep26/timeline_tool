@@ -42,11 +42,14 @@
                 <div class="col-md-6" >
                     <h2> <a target="" style="text-decoration: none;color: white;" href="/">Timeline Tool</a> </h1>
                 </div>
-                <% if !request.original_url.include? "show_graph" %>
                     <div class="col-md-6" >
-                        <a target="" style="float: right;color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">Show Graph</a>
+                        <a class="show_graph" target="" style="float: right; color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">
+                            <span style="font-size: 1.7rem;" class="glyphicon glyphicon-stats" ></span> Show Graph
+                        </a>
+                        <a class="create_task none" target="" style="float: right;color: white; text-decoration: none; padding: 2.2rem;" href="/">
+                            <span style="font-size: 1.7rem;" class="glyphicon glyphicon-tasks" ></span> Create Task
+                        </a>
                     </div>
-                <% end %>
             </div>
         </div>
     <% end %>
