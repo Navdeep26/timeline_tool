@@ -5,15 +5,17 @@
 <% end %>  
 <% all_user = Timeline.all.pluck('added_by').uniq %>
 
-  <div>
-    <h4 style="text-align: center; color: #ae00ad" >Filter based on user</h4>
-    <select name="user_name" class="form-control user_filter" >
-      <option value="" >Please Select</option>
-      <option value="all" >All user</option>
-      <% all_user.each do |user| %>
-        <option <% if params[:filter_name] == user %> selected <% end %> value="<%= user %>" ><%= user %></option>
-      <% end %>
-    </select>
+  <div class="row" >
+    <div class="col-md-12" >
+      <h4 style="text-align: center; color: #ae00ad" >Filter based on user</h4>
+      <select name="user_name" class="form-control user_filter" >
+        <option selected="true" disabled="disabled" >Please Select</option>
+        <option value="all" >All user</option>
+        <% all_user.each do |user| %>
+          <option <% if params[:filter_name] == user %> selected <% end %> value="<%= user %>" ><%= user %></option>
+        <% end %>
+      </select>
+    </div>  
   </div>
 
 
@@ -65,6 +67,7 @@ g.Draw();
 
 <script type="text/javascript">
     $(document).ready(function(){
+      // $('.gtaskbarcontainer').css('left', '59px')
     $('.gtasklist').addClass('none');
     $('.gfoldercollapse').addClass('none');
     $('.ggroupblackendpointleft').addClass('none');

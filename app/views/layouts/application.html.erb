@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
     <title>TimelineTool</title>
 
    <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -37,12 +38,12 @@
 
   <body>
     <% if !params[:task_id].present? && !params[:name].present? %>
-        <div class="header" >
+        <div class="header sticky" >
             <div class="row fixed-width" >
-                <div class="col-sm-6 col-md-6" >
+                <div class="col-xs-5 col-sm-6 col-md-6" >
                     <h2> <a target="" style="text-decoration: none;color: white;" href="/">Timeline Tool</a> </h1>
                 </div>
-                    <div class="col-sm-6 col-md-6" >
+                    <div class="col-xs-7 col-sm-6 col-md-6" >
                         <a class="show_graph" target="" style="float: right; color: white; text-decoration: none; padding: 2.2rem;" href="/show_graph">
                             <span style="font-size: 1.7rem;" class="glyphicon glyphicon-stats" ></span> Show Graph
                         </a>

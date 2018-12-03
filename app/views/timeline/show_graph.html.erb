@@ -152,6 +152,25 @@ td.gtaskcell {
   margin-bottom: 2rem;
 }
 
+@media only screen and (max-width: 600px) {
+    .timeline_form {
+          max-width: 30rem;
+         margin-bottom: 2rem;
+    }
+
+    .fixed-width .col-md-6 > h2 {
+      font-size: 1.7rem;
+      margin-top: 2.6rem;
+    }
+
+    .fixed-width .col-md-6 > span {
+      font-size: 1.8rem;
+    }
+     .header { 
+   overflow: auto;
+ }
+}
+
 </style>
 
 <%= javascript_include_tag "jsgantt.js" %>
@@ -179,7 +198,7 @@ td.gtaskcell {
         <p>Are you sure you want to delete</p>
       </div>
       <div class="modal-footer">
-        <button  type="button" data-id="" class="btn btn-primary confirm_delete">yes</button>
+        <button  type="button" data-id="" class="btn btn-primary confirm_delete">Yes</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
       </div>
     </div>
@@ -267,7 +286,6 @@ td.gtaskcell {
 </script> -->
 <script type="text/javascript">
   $(document).ready(function(){
-    debugger
     // $('.gtaskname').html('Task Name')
     $('.show_graph').addClass('none')
     $('.create_task').removeClass('none')

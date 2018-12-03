@@ -16,7 +16,6 @@
 
 
  $(document).delegate('.ggroupitem', 'click', function(){
-  debugger
   // $('.ggroupitem').dblclick(function(){
    var id = $(this).attr('id')
    var task_id = id.split('_')[1];
