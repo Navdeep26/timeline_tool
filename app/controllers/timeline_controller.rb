@@ -71,7 +71,7 @@ class TimelineController < ApplicationController
   end
 
   def filter_name
-    if params[:filter_name].present?
+    if params[:user_id].present?
       render :partial => "graph"
     end
   end

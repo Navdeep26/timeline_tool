@@ -296,10 +296,10 @@ td.gtaskcell {
   <% if !params[:name].present? %>
 
     $(document).delegate('.user_filter', 'change', function(){
-          var name = $('option:selected', this).text();
+          var name = $('option:selected', this).val();
           $.post("timeline/filter_name",
         {
-            filter_name: name,
+            user_id: name,
         },
         function(data, status){
             // $('.timeline_form').html(data);

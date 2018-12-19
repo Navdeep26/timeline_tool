@@ -1,18 +1,26 @@
-<% if params[:filter_name].present? && params[:filter_name] != "All user" %>
-  <% @all_timeline = Timeline.where(:added_by => params[:filter_name], :show_all => '1' ) %>
+<% if params[:user_id].present? && params[:user_id] != "All user" %>
+
+   <!-- @all_timeline = Timeline.where(:added_by => params[:filter_name], :show_all => '1' )  -->
+  <% if params[:user_id].to_i == session[:user].to_i %>
+    <% @all_timeline = Timeline.where("user_id = ?", params[:user_id]) %>
+  <% else %> 
+    <% @all_timeline = Timeline.where("user_id = ? AND show_all = ?", params[:user_id], '1') %>
+  <% end %>
 <% else %>
-<% @all_timeline = Timeline.where("user_id = ?  OR show_all = '1' ", session[:user]) %>
+  <% @all_timeline = Timeline.where("user_id = ?  OR show_all = '1' ", session[:user]) %>
 <% end %>  
-<% all_user = Timeline.all.pluck('added_by').uniq %>
+
+<!-- all_user = Timeline.all.pluck('added_by').uniq -->
+<% all_user = Timeline.all.includes(:user) %>
 
   <div class="row" >
     <div class="col-md-12" >
       <h4 style="text-align: center; color: black" >Filter based on user</h4>
-      <select name="user_name" class="form-control user_filter" >
+      <select name="user_id" class="form-control user_filter" >
         <option selected="true" disabled="disabled" >Please Select</option>
-        <option value="all" >All user</option>
-        <% all_user.each do |user| %>
-          <option <% if params[:filter_name] == user %> selected <% end %> value="<%= user %>" ><%= user %></option>
+        <!-- <option value="all" >All user</option> -->
+        <% all_user.each do |ind_user| %>
+          <option <% if params[:user_id].to_i == ind_user.user.id.to_i  %> selected <% end %> value="<%=ind_user.user.id %>" ><%= "#{ind_user.user.first_name} #{ind_user.user.last_name}" %></option>
         <% end %>
       </select>
     </div>  
