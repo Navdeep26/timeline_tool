@@ -116,9 +116,9 @@
     	// var field2 = $('.field2').val();
     	var field3 = $('.field3').val();
     	// var field4 = $('.field4').val();
-    	var field5 = $('.field5').val();
+    	// var field5 = $('.field5').val();
 	    debugger
-	    if (field1  && field3 && field5){
+	    if (field1  && field3 ){
 	    	$(this).html('loading')
 	    	$(this).prop('disabled', true);
 		    var form = $(this);

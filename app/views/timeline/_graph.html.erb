@@ -1,13 +1,13 @@
 <% if params[:filter_name].present? && params[:filter_name] != "All user" %>
-  <% @all_timeline = Timeline.where(:added_by => params[:filter_name]) %>
+  <% @all_timeline = Timeline.where(:added_by => params[:filter_name], :show_all => 1 ) %>
 <% else %>
-  <% @all_timeline = Timeline.all %>
+<% @all_timeline = Timeline.where("user_id = ?  OR show_all = 1", session[:user]) %>
 <% end %>  
 <% all_user = Timeline.all.pluck('added_by').uniq %>
 
   <div class="row" >
     <div class="col-md-12" >
-      <h4 style="text-align: center; color: #ae00ad" >Filter based on user</h4>
+      <h4 style="text-align: center; color: black" >Filter based on user</h4>
       <select name="user_name" class="form-control user_filter" >
         <option selected="true" disabled="disabled" >Please Select</option>
         <option value="all" >All user</option>

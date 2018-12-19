@@ -37,6 +37,17 @@
   </head>
 
   <body>
+    <style type="text/css">
+      .signout{
+          color: white;
+          text-decoration: none;
+          /* padding: 2.2rem 0rem; */
+          padding: 2.2rem;
+          vertical-align: middle;
+          display: inline-block;
+          float: right;
+      }
+    </style>
     <% if !params[:task_id].present? && !params[:name].present? %>
         <div class="header sticky" >
             <div class="row fixed-width" >
@@ -47,9 +58,14 @@
                         <a class="show_graph" target="" style="float: right; color: white; text-decoration: none; padding: 2.2rem 0rem;" href="/show_graph">
                             <span style="font-size: 1.7rem;" class="glyphicon glyphicon-stats" ></span> Show Graph
                         </a>
+                        <!-- <a style="float: right; color: white; text-decoration: none; padding: 2.2rem 0rem;" href="/sign-out"> <span class="glyphicon glyphicon-user" >Sign out</span> </a> -->
                         <a class="create_task none" target="" style="float: right;color: white; text-decoration: none; padding: 2.2rem 0rem;" href="/">
                             <span style="font-size: 1.7rem;" class="glyphicon glyphicon-tasks" ></span> Create Task
                         </a>
+                        <a class="signout" target="" style="color: white; text-decoration: none;" href="/sign-out">
+                            <span style="font-size: 1.7rem;" class="glyphicon glyphicon-user" ></span> Sign Out
+                        </a>
+                        <!-- <a style="float: right; color: white; text-decoration: none; padding: 2.2rem 0rem;" href="/sign-out"> <span class="glyphicon glyphicon-user"> Sign out</span> </a> -->
                     </div>
             </div>
         </div>
