@@ -134,9 +134,11 @@
   <% if @timeline.present?  %>
   <div class="row" >
     <div class="col-md-6" >
-      <button  type="button" class="btn btn-primary edit_form">Edit</button>
-      <button  type="button" data-dismiss="modal" class="btn btn-primary submit_form none">Update</button>
-      <button  type="button" data-dismiss="modal" data-id="<%= @timeline.id %>" class="btn btn-danger delete_timeline">Delete</button>
+      <% if @timeline.present? && @timeline.user_id.to_i == session[:user].to_i %>
+        <button  type="button" class="btn btn-primary edit_form">Edit</button>
+        <button  type="button" data-dismiss="modal" class="btn btn-primary submit_form none">Update</button>
+        <button  type="button" data-dismiss="modal" data-id="<%= @timeline.id %>" class="btn btn-danger delete_timeline">Delete</button>
+      <% end %>
     </div>
     <div class="col-md-6" >
         <button style="float: right;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>

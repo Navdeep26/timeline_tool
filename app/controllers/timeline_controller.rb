@@ -20,9 +20,9 @@ class TimelineController < ApplicationController
   	if params[:name].present?
       if params[:task_id].present?
         if params[:public].present? && params[:public] == "on"
-          timeline_array = Timeline.where(:id => params[:task_id]).update(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date], :show_all => "1" )
+          timeline_array = Timeline.where(:id => params[:task_id]).update_all(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date], :show_all => "1", :user_id => session[:user] )
         else
-          timeline_array = Timeline.where(:id => params[:task_id]).update(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date], :show_all => "0" )
+          timeline_array = Timeline.where(:id => params[:task_id]).update_all(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date], :show_all => "0", :user_id => session[:user] )
         end
         
             render :partial => "graph"
